@@ -1,26 +1,33 @@
-from abc import ABC, abstractmethod
-from typing import Optional
+from abc import abstractmethod
 
-from app_videogames.domain.user import User
+from .user import User
+from app_videogames.infrastructure.sqlite.user.user_create_model import UserCreateModel
+from app_videogames.infrastructure.sqlite.user.user_update_model import UserUpdateModel
 
 
-class UserRepository(ABC):
-    @abstractmethod
-    def create(self, user: User) -> Optional[User]:
-        raise NotImplementedError
+class UserRepository:
 
     @abstractmethod
-    def find_by_id(self, idUser: int) -> Optional[User]:
-        raise NotImplementedError
+    def get_users(self) -> User:
+        pass
 
     @abstractmethod
-    def find_by_email(self, email: str) -> Optional[User]:
-        raise NotImplementedError
+    def get_user_by_id(self, id_user: int) -> User:
+        pass
 
     @abstractmethod
-    def update(self, user: User) -> Optional[User]:
-        raise NotImplementedError
+    def insert_user(self, user: UserCreateModel) -> str:
+        pass
 
     @abstractmethod
-    def delete_by_id(self, idUser: int):
-        raise NotImplementedError
+    def update_user(self, id_user: int, user: UserUpdateModel) -> str:
+        pass
+
+    @abstractmethod
+    def delete_user(self, id_user: int) -> str:
+        pass
+
+    @abstractmethod
+    def authenticate_user(self, email: str, password: str):
+        pass
+        

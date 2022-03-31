@@ -1,3 +1,3 @@
-from .email import Email
-from .password import Password
-from .username import Username
+from .email import (Email, EmailError)
+from .password import (Password, PasswordError)
+from .username import (Username, UsernameError)

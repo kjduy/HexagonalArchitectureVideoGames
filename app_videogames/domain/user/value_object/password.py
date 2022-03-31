@@ -1,14 +1,20 @@
-from dataclasses import dataclass
-import re 
+import re
 
 
-@dataclass(init=False, eq=True, frozen=True)
 class Password: 
+
     _password: str
+    
     def __init__(self, _password: str):
+
         pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,64}$"
         regex = re.compile(pattern) 
-        _password = re.search(regex, _password)
-        if not _password:
-            raise ValueError("Password should contain at least 8 letters between uppercase - lowercase letters, numbers and symbols")
+        result = re.search(regex, _password)
+        
+        if not result:
+            raise PasswordError(PasswordError.message)
         object.__setattr__(self, "value", _password)
+
+class PasswordError(Exception):
+    message = "Password should contain at least 8 until 64 letters between uppercase - lowercase, numbers and symbols"
+        

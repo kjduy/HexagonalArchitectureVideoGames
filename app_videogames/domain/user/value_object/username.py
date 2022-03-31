@@ -1,15 +1,19 @@
-from dataclasses import dataclass
+import re
 
 
-@dataclass(init=False, eq=True, frozen=True)
-class Username:
+class Username(Exception):
+
     _username: str
+
     def __init__(self, _username: str):
-        if len(_username) < 5:
-            raise ValueError("Length should be at least 5")
-        elif len(_username) > 10:
-            raise ValueError("Length should not be greater than 10")
-        if not _username.isalnum():
-            raise ValueError("Username only can contain letters and numbers")
+
+        pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,10}$"
+        regex = re.compile(pattern) 
+        result = re.search(regex, _username)
+
+        if not result:
+            raise UsernameError(UsernameError.message)
         object.__setattr__(self, "value", _username)
-        
+
+class UsernameError(Exception):
+    message = "Username should contain at least 5 until 10 letters between uppercase - lowercase and numbers"

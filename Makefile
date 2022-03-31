@@ -6,4 +6,4 @@ install:
 	$(POETRY_EXPORT)
 
 run:
-	${UVICORN} app_videogames.main:app --reload
+	${UVICORN} app_videogames.api.main:app --reload
