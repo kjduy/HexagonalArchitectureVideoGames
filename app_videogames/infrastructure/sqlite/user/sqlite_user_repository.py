@@ -17,11 +17,15 @@ session = DBSession()
 class SqliteUserRepository(UserRepository):
     
     def get_users(self) -> User:
-        users = session.query(UserTable).all()
+        users = session.query(
+                *[column for column in UserTable.__table__.c if column.name != 'password']
+            ).all()
         return users
 
     def get_user_by_id(self, id_user: int) -> str:
-        user = session.query(UserTable).filter_by(idUser=id_user).one()
+        user = session.query(
+                *[column for column in UserTable.__table__.c if column.name != 'password']
+            ).filter_by(idUser=id_user).one()
         return user
 
     def insert_user(self, data: UserCreateModel) -> str:

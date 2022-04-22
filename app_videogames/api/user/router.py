@@ -37,6 +37,7 @@ async def generate_token(
 @inject
 async def get_users(
     users: GetUsers = Depends(Provide[UserContainer.get_users]),
+    token: str = Depends(oauth2_scheme)
 ):
     return users.get_users()
 

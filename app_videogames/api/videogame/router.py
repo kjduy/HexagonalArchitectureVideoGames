@@ -15,6 +15,7 @@ from app_videogames.api.user.router import router, oauth2_scheme
 @inject
 async def get_videogames(
     videogames: GetVideogames = Depends(Provide[VideogameContainer.get_videogames]),
+    token: str = Depends(oauth2_scheme)
 ):
     return videogames.get_videogames()
 
