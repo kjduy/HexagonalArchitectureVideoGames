@@ -1,8 +1,6 @@
 from abc import abstractmethod
 
 from .user import User
-from app_videogames.infrastructure.sqlite.user.user_create_model import UserCreateModel
-from app_videogames.infrastructure.sqlite.user.user_update_model import UserUpdateModel
 
 
 class UserRepository:
@@ -16,11 +14,11 @@ class UserRepository:
         pass
 
     @abstractmethod
-    def insert_user(self, user: UserCreateModel) -> str:
+    def insert_user(self, user) -> str:
         pass
 
     @abstractmethod
-    def update_user(self, id_user: int, user: UserUpdateModel) -> str:
+    def update_user(self, id_user: int, user) -> str:
         pass
 
     @abstractmethod

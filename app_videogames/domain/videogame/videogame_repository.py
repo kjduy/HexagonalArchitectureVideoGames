@@ -1,8 +1,6 @@
 from abc import abstractmethod
 
 from .videogame import Videogame
-from app_videogames.infrastructure.sqlite.videogame.videogame_create_model import VideogameCreateModel
-from app_videogames.infrastructure.sqlite.videogame.videogame_update_model import VideogameUpdateModel
 
 
 class VideogameRepository:
@@ -16,11 +14,11 @@ class VideogameRepository:
         pass
 
     @abstractmethod
-    def insert_videogame(self, id_user: int, videogame: VideogameCreateModel) -> str:
+    def insert_videogame(self, id_user: int, videogame) -> str:
         pass
 
     @abstractmethod
-    def update_videogame(self, id_videogame: int, user: VideogameUpdateModel) -> str:
+    def update_videogame(self, id_videogame: int, user) -> str:
         pass
 
     @abstractmethod

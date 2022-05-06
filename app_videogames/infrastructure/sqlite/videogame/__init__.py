@@ -1,4 +1,4 @@
 from .sqlite_videogame_repository import SqliteVideogameRepository
 from .videogame_create_model import VideogameCreateModel
 from .videogame_update_model import VideogameUpdateModel
-from .videogame_setup import VideogameTable
+from .videogame_setup import VideogameTable, Base

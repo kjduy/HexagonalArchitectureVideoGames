@@ -2,7 +2,7 @@ class Price:
 
     _price: float
 
-    def __init__(self, _price: str):
+    def __init__(self, _price: float):
         if (type(_price) != float):
             raise PriceError(PriceError.message)
         object.__setattr__(self, "value", _price)

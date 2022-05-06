@@ -19,7 +19,7 @@ class UserTable(Base):
            'username': self.username,
            'email': self.email,
            'password': self.password,
-       }
+       }    
 
 engine = create_engine('sqlite:///./db/app_videogames.db')
 Base.metadata.create_all(engine)
