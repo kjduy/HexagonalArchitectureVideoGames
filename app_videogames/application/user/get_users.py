@@ -10,8 +10,8 @@ class GetUsers:
         self.user_repository = user_repository
 
     def get_users(self) -> User:
-        return self.user_repository.get_users();
+        return self.user_repository.get_users()
 
     def get_user_by_id(self, id_user: int) -> User:
-        return self.user_repository.get_user_by_id(id_user);
+        return self.user_repository.get_user_by_id(id_user)
         

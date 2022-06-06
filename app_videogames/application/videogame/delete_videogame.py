@@ -10,5 +10,4 @@ class DeleteVideogame:
         self.videogame_repository = videogame_repository
 
     def delete_videogame(self, id_videogame: int) -> str:
-        return self.videogame_repository.delete_videogame(id_videogame);
-        
+        return self.videogame_repository.delete_videogame(id_videogame)

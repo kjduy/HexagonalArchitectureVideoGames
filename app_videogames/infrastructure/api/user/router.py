@@ -3,13 +3,18 @@ import jwt
 from dependency_injector.wiring import inject, Provide
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
-from app_videogames.application.user import (GetUsers, InsertUser, UpdateUser, DeleteUser, AuthenticateUser)
-from app_videogames.api.user.user_container import UserContainer
+from app_videogames.infrastructure.api.user.user_container import (
+    GetUsers,
+    UserContainer,
+    InsertUser,
+    UpdateUser,
+    DeleteUser,
+    AuthenticateUser
+)
 from app_videogames.infrastructure.sqlite.user import (UserCreateModel, UserUpdateModel)
 from app_videogames.domain.user.value_object import (EmailError, PasswordError, UsernameError)
-
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 
 router = APIRouter()
@@ -27,83 +32,83 @@ async def generate_token(
     user = user.authenticate_user(form_data.username, form_data.password)
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, 
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Invalid username or password'
         )
-    token = jwt.encode(user, JWT_SECRET)
-    return token
+    _token = jwt.encode(user, JWT_SECRET)
+    return _token
 
 @router.get('/users')
 @inject
 async def get_users(
     users: GetUsers = Depends(Provide[UserContainer.get_users]),
-    token: str = Depends(oauth2_scheme)
+    _token: str = Depends(oauth2_scheme)
 ):
     return users.get_users()
 
 @router.get('/user')
 @inject
 async def get_user_by_id(
-    idUser: int,
+    id_user: int,
     user: GetUsers = Depends(Provide[UserContainer.get_users]),
-    token: str = Depends(oauth2_scheme)
+    _token: str = Depends(oauth2_scheme)
 ):
-    return user.get_user_by_id(idUser)
+    return user.get_user_by_id(id_user)
 
 @router.post('/user')
 @inject
 async def insert_user(
     user_to_insert: UserCreateModel,
     user: InsertUser = Depends(Provide[UserContainer.insert_user]),
-    token: str = Depends(oauth2_scheme)
+    _token: str = Depends(oauth2_scheme)
 ):
     try:
         user_created = user.insert_user(user_to_insert)
-    except EmailError as e:
-        raise HTTPException(
+    except EmailError as error:
+        raise HTTPException (
             status_code=status.HTTP_409_CONFLICT,
-            detail=e.message,
-        )
-    except PasswordError as e:
-        raise HTTPException(
+            detail=error.message,
+        ) from error
+    except PasswordError as error:
+        raise HTTPException (
             status_code=status.HTTP_409_CONFLICT,
-            detail=e.message,
-        )
-    except UsernameError as e:
-        raise HTTPException(
+            detail=error.message,
+        ) from error
+    except UsernameError as error:
+        raise HTTPException (
             status_code=status.HTTP_409_CONFLICT,
-            detail=e.message,
-        )
+            detail=error.message,
+        ) from error
     return user_created
 
 @router.put('/user')
 @inject
 async def update_user(
-    idUser: int,
+    id_user: int,
     user_to_update: UserUpdateModel,
     user: UpdateUser = Depends(Provide[UserContainer.update_user]),
-    token: str = Depends(oauth2_scheme)
+    _token: str = Depends(oauth2_scheme)
 ):
     try:
-        user_updated = user.update_user(idUser, user_to_update)
-    except PasswordError as e:
+        user_updated = user.update_user(id_user, user_to_update)
+    except PasswordError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=e.message,
-        )
-    except UsernameError as e:
+            detail=error.message,
+        ) from error
+    except UsernameError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=e.message,
-        )
+            detail=error.message,
+        ) from error
     return user_updated
 
 @router.delete('/user')
 @inject
 async def delete_user(
-    idUser: int,
+    id_user: int,
     user: DeleteUser = Depends(Provide[UserContainer.delete_user]),
-    token: str = Depends(oauth2_scheme)
+    _token: str = Depends(oauth2_scheme)
 ):
-    return user.delete_user(idUser)
+    return user.delete_user(id_user)
     

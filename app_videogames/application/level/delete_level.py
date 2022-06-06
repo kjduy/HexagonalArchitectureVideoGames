@@ -10,5 +10,5 @@ class DeleteLevel:
         self.level_repository = level_repository
 
     def delete_level(self, id_level: int) -> str:
-        return self.level_repository.delete_level(id_level);
+        return self.level_repository.delete_level(id_level)
         

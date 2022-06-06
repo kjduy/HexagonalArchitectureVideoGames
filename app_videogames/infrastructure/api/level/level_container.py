@@ -5,7 +5,6 @@ from app_videogames.application.level import (GetLevels, InsertLevel, UpdateLeve
 
 
 class LevelContainer(containers.DeclarativeContainer):
-    
     sqlite_level_repository = providers.Singleton(SqliteLevelRepository)
 
     get_levels = providers.Factory(
@@ -22,7 +21,7 @@ class LevelContainer(containers.DeclarativeContainer):
         UpdateLevel,
         level_repository = sqlite_level_repository,
     )
-    
+
     delete_level = providers.Factory(
         DeleteLevel,
         level_repository = sqlite_level_repository,

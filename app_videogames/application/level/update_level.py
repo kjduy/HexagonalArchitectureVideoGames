@@ -11,5 +11,5 @@ class UpdateLevel:
         self.level_repository = level_repository
 
     def update_level(self, id_level: int, level: LevelUpdateModel) -> str:
-        return self.level_repository.update_level(id_level, level);
+        return self.level_repository.update_level(id_level, level)
         

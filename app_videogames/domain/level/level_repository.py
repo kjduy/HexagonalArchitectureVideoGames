@@ -14,11 +14,11 @@ class LevelRepository:
         pass
 
     @abstractmethod
-    def insert_level(self, level) -> str:
+    def insert_level(self, id_videogame: int, data) -> str:
         pass
 
     @abstractmethod
-    def update_level(self, id_level: int, level) -> str:
+    def update_level(self, id_level: int, data) -> str:
         pass
 
     @abstractmethod

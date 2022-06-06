@@ -11,5 +11,5 @@ class UpdateUser:
         self.user_repository = user_repository
 
     def update_user(self, id_user: int, user: UserUpdateModel) -> str:
-        return self.user_repository.update_user(id_user, user);
+        return self.user_repository.update_user(id_user, user)
         

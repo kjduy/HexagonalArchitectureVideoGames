@@ -14,11 +14,11 @@ class UserRepository:
         pass
 
     @abstractmethod
-    def insert_user(self, user) -> str:
+    def insert_user(self, data) -> str:
         pass
 
     @abstractmethod
-    def update_user(self, id_user: int, user) -> str:
+    def update_user(self, id_user: int, data) -> str:
         pass
 
     @abstractmethod

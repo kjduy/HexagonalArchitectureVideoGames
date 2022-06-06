@@ -10,5 +10,5 @@ class DeleteUser:
         self.user_repository = user_repository
 
     def delete_user(self, id_user: int) -> str:
-        return self.user_repository.delete_user(id_user);
+        return self.user_repository.delete_user(id_user)
         

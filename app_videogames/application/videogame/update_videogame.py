@@ -11,5 +11,5 @@ class UpdateVideogame:
         self.videogame_repository = videogame_repository
 
     def update_videogame(self, id_videogame: int, videogame: VideogameUpdateModel) -> str:
-        return self.videogame_repository.update_videogame(id_videogame, videogame);
+        return self.videogame_repository.update_videogame(id_videogame, videogame)
         

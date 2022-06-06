@@ -11,5 +11,5 @@ class InsertLevel:
         self.level_repository = level_repository
 
     def insert_level(self, id_videogame: int, level: LevelCreateModel) -> str:
-        return self.level_repository.insert_level(id_videogame, level);
+        return self.level_repository.insert_level(id_videogame, level)
         

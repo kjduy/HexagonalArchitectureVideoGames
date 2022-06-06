@@ -11,5 +11,5 @@ class InsertVideogame:
         self.videogame_repository = videogame_repository
 
     def insert_videogame(self, id_user: int, videogame: VideogameCreateModel) -> str:
-        return self.videogame_repository.insert_videogame(id_user, videogame);
+        return self.videogame_repository.insert_videogame(id_user, videogame)
         

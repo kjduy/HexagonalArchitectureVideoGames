@@ -1,10 +1,9 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 
 from app_videogames.infrastructure.sqlite.videogame import VideogameTable, Base
- 
+
 
 class LevelTable(Base):
 
@@ -14,7 +13,7 @@ class LevelTable(Base):
     difficulty = Column(String, nullable=False)
     last_game_date = Column(String, nullable=True)
     idVideogame = Column(Integer,ForeignKey("videogame.idVideogame"))
-    videogame = relationship(VideogameTable) 
+    videogame = relationship(VideogameTable)
 
 engine = create_engine('sqlite:///./db/app_videogames.db')
 Base.metadata.create_all(engine)

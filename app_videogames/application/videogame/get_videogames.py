@@ -10,8 +10,8 @@ class GetVideogames:
         self.videogame_repository = videogame_repository
 
     def get_videogames(self) -> Videogame:
-        return self.videogame_repository.get_videogames();
+        return self.videogame_repository.get_videogames()
 
     def get_videogame_by_id(self, id_videogame: int) -> Videogame:
-        return self.videogame_repository.get_videogame_by_id(id_videogame);
+        return self.videogame_repository.get_videogame_by_id(id_videogame)
         

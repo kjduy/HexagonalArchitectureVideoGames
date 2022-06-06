@@ -2,8 +2,14 @@ from app_videogames.domain.level.value_object import (LevelName, Difficulty, Las
 
 
 class Level:
-    
-    def __init__(self, id_level: int, level_name: LevelName, difficulty: Difficulty, last_game_date: LastGameDate):
+
+    def __init__(
+        self,
+        id_level: int,
+        level_name: LevelName,
+        difficulty: Difficulty,
+        last_game_date: LastGameDate
+    ):
         self.id_level: int = id_level
         self.level_name: LevelName = level_name
         self.difficulty: Difficulty = difficulty
