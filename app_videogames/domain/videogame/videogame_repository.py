@@ -14,7 +14,7 @@ class VideogameRepository:
         pass
 
     @abstractmethod
-    def insert_videogame(self, id_user: int, data) -> str:
+    def insert_videogame(self, user_id: int, data) -> str:
         pass
 
     @abstractmethod

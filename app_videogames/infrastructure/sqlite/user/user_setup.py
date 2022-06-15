@@ -7,14 +7,14 @@ Base = declarative_base()
 class UserTable(Base):
 
     __tablename__ = "user"
-    idUser = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
 
     def serialize(self):
         return {
-            'idUser': self.idUser,
+            'user_id': self.user_id,
             'username': self.username,
             'email': self.email,
             'password': self.password

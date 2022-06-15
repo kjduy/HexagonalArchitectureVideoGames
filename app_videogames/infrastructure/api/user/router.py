@@ -49,11 +49,11 @@ async def get_users(
 @router.get('/user')
 @inject
 async def get_user_by_id(
-    id_user: int,
+    user_id: int,
     user: GetUsers = Depends(Provide[UserContainer.get_users]),
     _token: str = Depends(oauth2_scheme)
 ):
-    return user.get_user_by_id(id_user)
+    return user.get_user_by_id(user_id)
 
 @router.post('/user')
 @inject
@@ -84,13 +84,13 @@ async def insert_user(
 @router.put('/user')
 @inject
 async def update_user(
-    id_user: int,
+    user_id: int,
     user_to_update: UserUpdateModel,
     user: UpdateUser = Depends(Provide[UserContainer.update_user]),
     _token: str = Depends(oauth2_scheme)
 ):
     try:
-        user_updated = user.update_user(id_user, user_to_update)
+        user_updated = user.update_user(user_id, user_to_update)
     except PasswordError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -106,9 +106,9 @@ async def update_user(
 @router.delete('/user')
 @inject
 async def delete_user(
-    id_user: int,
+    user_id: int,
     user: DeleteUser = Depends(Provide[UserContainer.delete_user]),
     _token: str = Depends(oauth2_scheme)
 ):
-    return user.delete_user(id_user)
+    return user.delete_user(user_id)
     

@@ -12,10 +12,12 @@ class Videogame:
         id_videogame: int,
         name: VideogameName,
         price: Price,
-        description: VideogameDescription
+        description: VideogameDescription,
+        user_id: int
     ):
         self.id_videogame: int = id_videogame
         self.name: VideogameName = name
         self.price: Price = price
         self.description: VideogameDescription = description
+        self.user_id: int = user_id
         

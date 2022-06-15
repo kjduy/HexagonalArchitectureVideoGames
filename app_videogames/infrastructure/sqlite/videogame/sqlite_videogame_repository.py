@@ -1,9 +1,6 @@
 import sqlite3
 import functools
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
 from app_videogames.domain.videogame import (Videogame, VideogameRepository)
 from app_videogames.domain.videogame.value_object import (
     VideogameName,
@@ -11,27 +8,26 @@ from app_videogames.domain.videogame.value_object import (
     VideogameDescription
 )
 from app_videogames.infrastructure.sqlite.user import UserTable
-from app_videogames.infrastructure.sqlite import session_com_rol_clo as crc
+from app_videogames.infrastructure.sqlite import session_com_rol_clo as crc, open_session
 from .videogame_setup import VideogameTable
 from .videogame_create_model import VideogameCreateModel
 from .videogame_update_model import VideogameUpdateModel
 
 
-engine = create_engine('sqlite:///./db/app_videogames.db')
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
-
 class SqliteVideogameRepository(VideogameRepository):
 
     def get_videogames(self) -> Videogame:
+        session = open_session.create_session()
         videogames = session.query(VideogameTable).all()
         return videogames
 
     def get_videogame_by_id(self, id_videogame: int) -> str:
+        session = open_session.create_session()
         videogame = session.query(VideogameTable).filter_by(idVideogame=id_videogame).one()
         return videogame
 
-    def insert_videogame(self, id_user: int, data: VideogameCreateModel) -> str:
+    def insert_videogame(self, user_id: int, data: VideogameCreateModel) -> str:
+        session = open_session.create_session()
         connection = sqlite3.connect("./db/app_videogames.db")
         cursor = connection.cursor()
         num_vdg = cursor.execute('SELECT count(*) FROM videogame').fetchone()
@@ -42,7 +38,7 @@ class SqliteVideogameRepository(VideogameRepository):
                 'select idVideogame from videogame order by idVideogame desc limit 1'
             ).fetchone()
             id_videogame = functools.reduce(lambda sub, ele: sub * 10 + ele, id_videogame)
-        user = session.query(UserTable).filter_by(idUser=id_user).one()
+        user = session.query(UserTable).filter_by(user_id=user_id).one()
         name = VideogameName(data.name)
         price = Price(data.price)
         description = VideogameDescription(data.description)
@@ -51,12 +47,13 @@ class SqliteVideogameRepository(VideogameRepository):
             name = name.value,
             price = price.value,
             description = description.value,
-            idUser = user.idUser)
+            user_id = user.user_id)
         session.add(add_videogame)
         crc.session_commit_rollback_close(session)
         return "Videogame created"
 
     def update_videogame(self, id_videogame: int, data: VideogameUpdateModel) -> str:
+        session = open_session.create_session()
         videogame = session.query(VideogameTable).filter_by(idVideogame=id_videogame).one()
         name = VideogameName(data.name)
         price = Price(data.price)
@@ -69,6 +66,7 @@ class SqliteVideogameRepository(VideogameRepository):
         return "Videogame updated"
 
     def delete_videogame(self, id_videogame: int) -> str:
+        session = open_session.create_session()
         videogame = session.query(VideogameTable).filter_by(idVideogame=id_videogame).one()
         session.delete(videogame)
         crc.session_commit_rollback_close(session)

@@ -1,13 +1,10 @@
 import sqlite3
 import functools
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
 from app_videogames.domain.level import (Level, LevelRepository)
 from app_videogames.domain.level.value_object import (LevelName, Difficulty, LastGameDate)
 from app_videogames.infrastructure.sqlite.videogame import VideogameTable
-from app_videogames.infrastructure.sqlite import session_com_rol_clo as crc
+from app_videogames.infrastructure.sqlite import session_com_rol_clo as crc, open_session
 from .level_setup import LevelTable
 from .level_create_model import LevelCreateModel
 from .level_update_model import LevelUpdateModel
@@ -20,14 +17,17 @@ session = DBSession()
 class SqliteLevelRepository(LevelRepository):
 
     def get_levels(self) -> Level:
+        session = open_session.create_session()
         levels = session.query(LevelTable).all()
         return levels
 
     def get_level_by_id(self, id_level: int) -> str:
+        session = open_session.create_session()
         level = session.query(LevelTable).filter_by(idLevel=id_level).one()
         return level
 
     def insert_level(self, id_videogame: int, data: LevelCreateModel) -> str:
+        session = open_session.create_session()
         connection = sqlite3.connect("./db/app_videogames.db")
         cursor = connection.cursor()
         num_lvl = cursor.execute('SELECT count(*) FROM level').fetchone()
@@ -53,6 +53,7 @@ class SqliteLevelRepository(LevelRepository):
         return "Level created"
 
     def update_level(self, id_level: int, data: LevelUpdateModel) -> str:
+        session = open_session.create_session()
         level = session.query(LevelTable).filter_by(idLevel=id_level).one()
         name = LevelName(data.name)
         difficulty = Difficulty(data.difficulty)
@@ -65,6 +66,7 @@ class SqliteLevelRepository(LevelRepository):
         return "Level updated"
 
     def delete_level(self, id_level: int) -> str:
+        session = open_session.create_session()
         level = session.query(LevelTable).filter_by(idLevel=id_level).one()
         session.delete(level)
         crc.session_commit_rollback_close(session)

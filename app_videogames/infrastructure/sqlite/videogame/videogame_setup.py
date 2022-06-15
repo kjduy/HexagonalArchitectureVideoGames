@@ -12,7 +12,7 @@ class VideogameTable(Base):
     name = Column(String, unique=True, nullable=False)
     price = Column(Float, nullable=False)
     description = Column(String, nullable=True)
-    idUser = Column(Integer,ForeignKey("user.idUser"))
+    user_id = Column(Integer,ForeignKey("user.user_id"))
     user = relationship(UserTable)
 
 engine = create_engine('sqlite:///./db/app_videogames.db')

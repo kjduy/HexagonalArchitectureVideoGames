@@ -10,7 +10,7 @@ class UserRepository:
         pass
 
     @abstractmethod
-    def get_user_by_id(self, id_user: int) -> User:
+    def get_user_by_id(self, user_id: int) -> User:
         pass
 
     @abstractmethod
@@ -18,11 +18,11 @@ class UserRepository:
         pass
 
     @abstractmethod
-    def update_user(self, id_user: int, data) -> str:
+    def update_user(self, user_id: int, data) -> str:
         pass
 
     @abstractmethod
-    def delete_user(self, id_user: int) -> str:
+    def delete_user(self, user_id: int) -> str:
         pass
 
     @abstractmethod

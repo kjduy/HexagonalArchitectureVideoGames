@@ -41,13 +41,13 @@ async def get_videogame_by_id(
 @router.post('/videogame')
 @inject
 async def insert_videogame(
-    id_user: int,
+    user_id: int,
     videogame_to_insert: VideogameCreateModel,
     videogame: InsertVideogame = Depends(Provide[VideogameContainer.insert_videogame]),
     _token: str = Depends(oauth2_scheme)
 ):
     try:
-        videogame_created = videogame.insert_videogame(id_user, videogame_to_insert)
+        videogame_created = videogame.insert_videogame(user_id, videogame_to_insert)
     except VideogameNameError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,

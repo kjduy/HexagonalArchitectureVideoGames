@@ -1,11 +1,8 @@
-from dependency_injector.wiring import inject
-
 from app_videogames.domain.videogame import (Videogame, VideogameRepository)
 
 
 class GetVideogames:
 
-    @inject
     def __init__(self, videogame_repository: VideogameRepository):
         self.videogame_repository = videogame_repository
 

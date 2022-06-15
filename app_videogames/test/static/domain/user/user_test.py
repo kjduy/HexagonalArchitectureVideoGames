@@ -6,7 +6,7 @@ def test_get_safe_users():
         User (
             username="Kevin124",
             email="kevin.duy@ioet.com",
-            id_user=1,
+            user_id=1,
             password="Changep@ssword124"
         )
     ]
@@ -15,7 +15,7 @@ def test_get_safe_users():
         User (
             username="Kevin124",
             email="kevin.duy@ioet.com",
-            id_user=1,
+            user_id=1,
             password="Changep@ssword124"
         )
     ]
@@ -23,4 +23,4 @@ def test_get_safe_users():
 
     assert real_value[0].username == expected_value[0].username
     assert real_value[0].email == expected_value[0].email
-    assert real_value[0].id_user == expected_value[0].id_user
+    assert real_value[0].user_id == expected_value[0].user_id
