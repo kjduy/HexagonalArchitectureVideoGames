@@ -1,4 +1,4 @@
-from app_videogames.domain.videogame.value_object import (
+from .value_object import (
     VideogameName,
     Price,
     VideogameDescription
@@ -7,17 +7,22 @@ from app_videogames.domain.videogame.value_object import (
 
 class Videogame:
 
+    videogame_id: int
+    name: VideogameName
+    price: Price
+    description: VideogameDescription
+    user_id: int
+
     def __init__(
         self,
-        id_videogame: int,
+        videogame_id: int,
         name: VideogameName,
         price: Price,
         description: VideogameDescription,
         user_id: int
     ):
-        self.id_videogame: int = id_videogame
+        self.videogame_id: int = videogame_id
         self.name: VideogameName = name
         self.price: Price = price
         self.description: VideogameDescription = description
         self.user_id: int = user_id
-        

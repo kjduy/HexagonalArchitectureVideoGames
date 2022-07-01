@@ -5,7 +5,7 @@ from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
-from app_videogames.infrastructure.api.user.user_container import (
+from .user_container import (
     GetUsers,
     UserContainer,
     InsertUser,
@@ -13,8 +13,8 @@ from app_videogames.infrastructure.api.user.user_container import (
     DeleteUser,
     AuthenticateUser
 )
-from app_videogames.infrastructure.sqlite.user import (UserCreateModel, UserUpdateModel)
-from app_videogames.domain.user.value_object import (EmailError, PasswordError, UsernameError)
+from ...sqlite.user import UserCreateModel, UserUpdateModel
+from ....domain.user.value_object import EmailError, PasswordError, UsernameError
 
 
 router = APIRouter()
@@ -60,7 +60,6 @@ async def get_user_by_id(
 async def insert_user(
     user_to_insert: UserCreateModel,
     user: InsertUser = Depends(Provide[UserContainer.insert_user]),
-    _token: str = Depends(oauth2_scheme)
 ):
     try:
         user_created = user.insert_user(user_to_insert)

@@ -2,23 +2,23 @@ from dependency_injector.wiring import inject, Provide
 
 from fastapi import Depends, HTTPException, status
 
-from app_videogames.infrastructure.api.videogame.videogame_container import (
+from .videogame_container import (
     VideogameContainer,
     GetVideogames,
     InsertVideogame,
     UpdateVideogame,
     DeleteVideogame
 )
-from app_videogames.infrastructure.sqlite.videogame import (
+from ...sqlite.videogame import (
     VideogameCreateModel,
     VideogameUpdateModel
 )
-from app_videogames.domain.videogame.value_object import (
+from ....domain.videogame.value_object import (
     VideogameNameError,
     PriceError,
     VideogameDescriptionError
 )
-from app_videogames.infrastructure.api.user.router import router, oauth2_scheme
+from ..user.router import router, oauth2_scheme
 
 
 @router.get('/videogames')
@@ -32,11 +32,11 @@ async def get_videogames(
 @router.get('/videogame')
 @inject
 async def get_videogame_by_id(
-    id_videogame: int,
+    videogame_id: int,
     videogame: GetVideogames = Depends(Provide[VideogameContainer.get_videogames]),
     _token: str = Depends(oauth2_scheme)
 ):
-    return videogame.get_videogame_by_id(id_videogame)
+    return videogame.get_videogame_by_id(videogame_id)
 
 @router.post('/videogame')
 @inject
@@ -68,13 +68,13 @@ async def insert_videogame(
 @router.put('/videogame')
 @inject
 async def update_videogame(
-    id_videogame: int,
+    videogame_id: int,
     videogame_to_update: VideogameUpdateModel,
     videogame: UpdateVideogame = Depends(Provide[VideogameContainer.update_videogame]),
     _token: str = Depends(oauth2_scheme)
 ):
     try:
-        videogame_updated = videogame.update_videogame(id_videogame, videogame_to_update)
+        videogame_updated = videogame.update_videogame(videogame_id, videogame_to_update)
     except VideogameNameError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -95,9 +95,9 @@ async def update_videogame(
 @router.delete('/videogame')
 @inject
 async def delete_videogame(
-    id_videogame: int,
+    videogame_id: int,
     videogame: DeleteVideogame = Depends(Provide[VideogameContainer.delete_videogame]),
     _token: str = Depends(oauth2_scheme)
 ):
-    return videogame.delete_videogame(id_videogame)
+    return videogame.delete_videogame(videogame_id)
     

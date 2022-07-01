@@ -12,5 +12,5 @@ class LastGameDate:
 
 
 class LastGameDateError(Exception):
-    message = "The date format should be %Y-%m-%d"
+    message = 'The date format should be %Y-%m-%d'
         

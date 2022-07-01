@@ -1,4 +1,4 @@
-from app_videogames.domain.user import (User, UserRepository)
+from ...domain.user import User, UserRepository
 
 
 class GetUsers:

@@ -13,5 +13,5 @@ class Username:
 
 
 class UsernameError(Exception):
-    message = "Username should contain at least "  \
-    "5 until 10 letters between uppercase - lowercase and numbers"
+    message = 'Username should contain at least ' \
+    '5 until 10 letters between uppercase - lowercase and numbers'

@@ -2,15 +2,15 @@ from dependency_injector.wiring import inject, Provide
 
 from fastapi import Depends, HTTPException, status
 
-from app_videogames.infrastructure.api.level.level_container import LevelContainer
-from app_videogames.application.level import (GetLevels, InsertLevel, UpdateLevel, DeleteLevel)
-from app_videogames.infrastructure.sqlite.level import (LevelCreateModel, LevelUpdateModel)
-from app_videogames.domain.level.value_object import (
+from .level_container import LevelContainer
+from ....application.level import GetLevels, InsertLevel, UpdateLevel, DeleteLevel
+from ...sqlite.level import LevelCreateModel, LevelUpdateModel
+from ....domain.level.value_object import (
     LevelNameError,
     DifficultyError,
     LastGameDateError
 )
-from app_videogames.infrastructure.api.user.router import router, oauth2_scheme
+from ..user.router import router, oauth2_scheme
 
 
 @router.get('/levels')
@@ -24,22 +24,22 @@ async def get_levels(
 @router.get('/level')
 @inject
 async def get_level_by_id(
-    id_level: int,
+    level_id: int,
     level: GetLevels = Depends(Provide[LevelContainer.get_levels]),
     _token: str = Depends(oauth2_scheme)
 ):
-    return level.get_level_by_id(id_level)
+    return level.get_level_by_id(level_id)
 
 @router.post('/level')
 @inject
 async def insert_level(
-    id_videogame: int,
+    videogame_id: int,
     level_to_insert: LevelCreateModel,
     level: InsertLevel = Depends(Provide[LevelContainer.insert_level]),
     _token: str = Depends(oauth2_scheme)
 ):
     try:
-        level_created = level.insert_level(id_videogame, level_to_insert)
+        level_created = level.insert_level(videogame_id, level_to_insert)
     except LevelNameError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -60,13 +60,13 @@ async def insert_level(
 @router.put('/level')
 @inject
 async def update_level(
-    id_level: int,
+    level_id: int,
     level_to_update: LevelUpdateModel,
     level: UpdateLevel = Depends(Provide[LevelContainer.update_level]),
     _token: str = Depends(oauth2_scheme)
 ):
     try:
-        level_updated = level.update_level(id_level, level_to_update)
+        level_updated = level.update_level(level_id, level_to_update)
     except LevelNameError as error:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -87,9 +87,9 @@ async def update_level(
 @router.delete('/level')
 @inject
 async def delete_level(
-    id_level: int,
+    level_id: int,
     level: DeleteLevel = Depends(Provide[LevelContainer.delete_level]),
     _token: str = Depends(oauth2_scheme)
 ):
-    return level.delete_level(id_level)
+    return level.delete_level(level_id)
     

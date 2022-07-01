@@ -1,16 +1,17 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
-from .videogame import Videogame
+from . import Videogame
 
 
-class VideogameRepository:
+# pylint: disable=duplicate-code
+class VideogameRepository(ABC):
 
     @abstractmethod
     def get_videogames(self) -> Videogame:
         pass
 
     @abstractmethod
-    def get_videogame_by_id(self, id_videogame: int) -> Videogame:
+    def get_videogame_by_id(self, videogame_id: int) -> Videogame:
         pass
 
     @abstractmethod
@@ -18,10 +19,9 @@ class VideogameRepository:
         pass
 
     @abstractmethod
-    def update_videogame(self, id_videogame: int, data) -> str:
+    def update_videogame(self, videogame_id: int, data) -> str:
         pass
 
     @abstractmethod
-    def delete_videogame(self, id_videogame: int) -> str:
+    def delete_videogame(self, videogame_id: int) -> str:
         pass
-        

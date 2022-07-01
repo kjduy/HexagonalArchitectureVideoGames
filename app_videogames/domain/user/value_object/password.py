@@ -13,6 +13,6 @@ class Password:
 
 
 class PasswordError(Exception):
-    message = "Password should contain at least "  \
-    "8 until 64 letters between uppercase - lowercase, numbers and symbols"
+    message = 'Password should contain at least'  \
+    '8 until 64 letters between uppercase - lowercase, numbers and symbols'
         

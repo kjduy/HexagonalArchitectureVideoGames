@@ -1,7 +1,7 @@
 from dependency_injector.wiring import inject
 
-from app_videogames.domain.user import UserRepository
-from app_videogames.infrastructure.sqlite.user import UserCreateModel
+from ...domain.user import UserRepository
+from ...infrastructure.sqlite.user import UserCreateModel
 
 
 class InsertUser:

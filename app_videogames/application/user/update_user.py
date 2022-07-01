@@ -1,5 +1,5 @@
-from app_videogames.domain.user import UserRepository
-from app_videogames.infrastructure.sqlite.user import UserUpdateModel
+from ...domain.user import UserRepository
+from ...infrastructure.sqlite.user import UserUpdateModel
 
 
 class UpdateUser:

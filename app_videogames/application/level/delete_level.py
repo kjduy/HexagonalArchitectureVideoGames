@@ -1,4 +1,4 @@
-from app_videogames.domain.level import LevelRepository
+from ...domain.level import LevelRepository
 
 
 class DeleteLevel:
@@ -6,6 +6,5 @@ class DeleteLevel:
     def __init__(self, level_repository: LevelRepository):
         self.level_repository = level_repository
 
-    def delete_level(self, id_level: int) -> str:
-        return self.level_repository.delete_level(id_level)
-        
+    def delete_level(self, level_id: int) -> str:
+        return self.level_repository.delete_level(level_id)

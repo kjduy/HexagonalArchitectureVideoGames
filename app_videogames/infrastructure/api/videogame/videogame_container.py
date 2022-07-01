@@ -1,8 +1,7 @@
 from dependency_injector import containers, providers
 
-from app_videogames.infrastructure.sqlite.videogame.sqlite_videogame_repository \
-import SqliteVideogameRepository
-from app_videogames.application.videogame import (
+from ...sqlite.videogame.sqlite_videogame_repository import SqliteVideogameRepository
+from ....application.videogame import (
     GetVideogames,
     InsertVideogame,
     UpdateVideogame,

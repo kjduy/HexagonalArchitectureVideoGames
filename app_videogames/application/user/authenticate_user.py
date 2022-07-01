@@ -1,4 +1,4 @@
-from app_videogames.domain.user import UserRepository
+from ...domain.user import UserRepository
 
 
 class AuthenticateUser:

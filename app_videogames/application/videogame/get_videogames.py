@@ -1,4 +1,4 @@
-from app_videogames.domain.videogame import (Videogame, VideogameRepository)
+from ...domain.videogame import Videogame, VideogameRepository
 
 
 class GetVideogames:
@@ -9,6 +9,6 @@ class GetVideogames:
     def get_videogames(self) -> Videogame:
         return self.videogame_repository.get_videogames()
 
-    def get_videogame_by_id(self, id_videogame: int) -> Videogame:
-        return self.videogame_repository.get_videogame_by_id(id_videogame)
+    def get_videogame_by_id(self, videogame_id: int) -> Videogame:
+        return self.videogame_repository.get_videogame_by_id(videogame_id)
         

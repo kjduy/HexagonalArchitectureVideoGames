@@ -1,7 +1,7 @@
 from dependency_injector import containers, providers
 
-from app_videogames.infrastructure.sqlite.user.sqlite_user_repository import SqliteUserRepository
-from app_videogames.application.user import (
+from ...sqlite.user.sqlite_user_repository import SqliteUserRepository
+from ....application.user import (
     GetUsers,
     InsertUser,
     UpdateUser,

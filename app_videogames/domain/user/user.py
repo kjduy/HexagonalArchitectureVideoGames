@@ -1,7 +1,12 @@
-from app_videogames.domain.user.value_object import (Email, Password, Username)
+from .value_object import Email, Password, Username
 
 
 class User:
+
+    user_id: int
+    username: Username
+    email: Email
+    password: Password
 
     def __init__(self, user_id: int, username: Username, email: Email, password: Password):
         self.user_id: int = user_id

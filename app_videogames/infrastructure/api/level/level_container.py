@@ -1,7 +1,7 @@
 from dependency_injector import containers, providers
 
-from app_videogames.infrastructure.sqlite.level.sqlite_level_repository import SqliteLevelRepository
-from app_videogames.application.level import (GetLevels, InsertLevel, UpdateLevel, DeleteLevel)
+from ...sqlite.level.sqlite_level_repository import SqliteLevelRepository
+from ....application.level import GetLevels, InsertLevel, UpdateLevel, DeleteLevel
 
 
 class LevelContainer(containers.DeclarativeContainer):

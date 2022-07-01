@@ -13,5 +13,5 @@ class VideogameName:
 
 
 class VideogameNameError(Exception):
-    message = "The name can only contain letters or numbers"
+    message = 'The name can only contain letters or numbers'
         

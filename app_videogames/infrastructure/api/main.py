@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
-from app_videogames.infrastructure.api.videogame.videogame_container import VideogameContainer
-from app_videogames.infrastructure.api.user.user_container import UserContainer
-from app_videogames.infrastructure.api.level.level_container import LevelContainer
-from app_videogames.infrastructure.api.videogame import router as videogame_router
-from app_videogames.infrastructure.api.user import router as user_router
-from app_videogames.infrastructure.api.level import router as level_router
+from .videogame.videogame_container import VideogameContainer
+from .user.user_container import UserContainer
+from .level.level_container import LevelContainer
+from .videogame import router as videogame_router
+from .user import router as user_router
+from .level import router as level_router
 
 app = FastAPI()
 

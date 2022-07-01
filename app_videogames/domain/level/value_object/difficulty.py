@@ -13,5 +13,5 @@ class Difficulty:
 
 
 class DifficultyError(Exception):
-    message = "The difficulty can only be: Easy, Medium or Hard"
+    message = 'The difficulty can only be: Easy, Medium or Hard'
         

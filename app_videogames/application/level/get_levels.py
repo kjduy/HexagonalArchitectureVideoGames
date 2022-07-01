@@ -1,4 +1,4 @@
-from app_videogames.domain.level import (Level, LevelRepository)
+from ...domain.level import Level, LevelRepository
 
 
 class GetLevels:
@@ -9,6 +9,6 @@ class GetLevels:
     def get_levels(self) -> Level:
         return self.level_repository.get_levels()
 
-    def get_level_by_id(self, id_level: int) -> Level:
-        return self.level_repository.get_level_by_id(id_level)
+    def get_level_by_id(self, level_id: int) -> Level:
+        return self.level_repository.get_level_by_id(level_id)
         

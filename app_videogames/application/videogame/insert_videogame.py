@@ -1,5 +1,5 @@
-from app_videogames.domain.videogame import VideogameRepository
-from app_videogames.infrastructure.sqlite.videogame import VideogameCreateModel
+from ...domain.videogame import VideogameRepository
+from ...infrastructure.sqlite.videogame import VideogameCreateModel
 
 
 class InsertVideogame:

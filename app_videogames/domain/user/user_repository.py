@@ -1,9 +1,10 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
-from .user import User
+from . import User
 
 
-class UserRepository:
+# pylint: disable=duplicate-code
+class UserRepository(ABC):
 
     @abstractmethod
     def get_users(self) -> User:
@@ -28,4 +29,3 @@ class UserRepository:
     @abstractmethod
     def authenticate_user(self, email: str, password: str):
         pass
-        
